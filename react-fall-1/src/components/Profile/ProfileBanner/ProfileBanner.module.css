@@ -1,0 +1,12 @@
+.banner {
+  width: 100%;
+  height: 200px;
+  background-color: var(--color-surface);
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
