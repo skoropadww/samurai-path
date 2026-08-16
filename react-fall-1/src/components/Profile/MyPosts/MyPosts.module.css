@@ -13,6 +13,80 @@
   margin-bottom: var(--space-16);
 }
 
+.news_form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  margin-bottom: var(--space-20);
+}
+
+.news_form textarea {
+  width: 100%;
+  min-height: 96px;
+  resize: vertical;
+  padding: var(--space-12) var(--space-16);
+  border: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+  border-radius: var(--radius-sm);
+  background-color: color-mix(in srgb, var(--color-surface) 18%, var(--color-primary));
+  color: var(--color-on-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-line);
+  outline: none;
+  transition:
+    border-color var(--duration-base) var(--easing),
+    background-color var(--duration-fast) var(--easing);
+}
+
+.news_form textarea::placeholder {
+  color: color-mix(in srgb, var(--color-on-primary) 45%, transparent);
+}
+
+.news_form textarea:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 70%, transparent);
+}
+
+.news_form textarea:focus {
+  border-color: #ffe566;
+  background-color: color-mix(in srgb, var(--color-surface) 28%, var(--color-primary));
+}
+
+.news_form button {
+  align-self: flex-end;
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-10) var(--space-20);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  font-weight: 700;
+  line-height: var(--text-body-line);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--easing),
+    border-color var(--duration-base) var(--easing),
+    transform var(--duration-fast) var(--easing);
+}
+
+.news_form button:hover {
+  background-color: #ffe566;
+  border-color: #ffe566;
+  transform: translateY(-1px);
+}
+
+.news_form button:focus-visible {
+  outline: 2px solid #ffe566;
+  outline-offset: 2px;
+}
+
+.news_form button:active {
+  transform: translateY(0);
+}
+
 .news_posts {
   display: flex;
   flex-direction: column;

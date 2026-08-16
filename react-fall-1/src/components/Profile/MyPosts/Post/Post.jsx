@@ -1,12 +1,12 @@
 import React from 'react';
 import cl from './Post.module.css';
 
-const Post = () => {
+const Post = (props) => {
   return (
     <div className={cl.item}>
-        <p>Post 1</p>
-        <div>
-            <button>Like</button>
+        <p className={cl.message}>{props.massege}</p>
+        <div className={cl.likes}>
+            <span className={cl.likes_count}>Likes {props.likeCount}</span>
         </div>
     </div>
   );
