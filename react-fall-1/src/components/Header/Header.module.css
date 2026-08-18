@@ -2,6 +2,7 @@
   background-color: var(--color-primary);
   border-bottom: 1px solid color-mix(in srgb, var(--color-on-primary) 12%, transparent);
   padding: var(--space-12) 0;
+  height: 73px;
 }
 
 .header_logo {

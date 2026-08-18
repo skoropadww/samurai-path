@@ -131,7 +131,6 @@ ul {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-10);
-  min-height: 100vh;
   padding-bottom: var(--space-20);
 }
 
