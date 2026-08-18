@@ -1,15 +1,16 @@
 import React from 'react';
 import classes from './Sidebar.module.css';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
     <nav className={classes.nav}>
         <ul>
-          <li><a className={classes.active} href="/profile">Profile</a></li>
-          <li><a href="/dialogs">Messages</a></li>
-          <li><a href="/news">News</a></li>
-          <li><a href="/music">Music</a></li>
-          <li><a href="/settings">Settings</a></li>
+          <li><NavLink className={({isActive}) => isActive ? classes.active : ''} to="/profile" >Profile</NavLink></li>
+          <li><NavLink className={({isActive}) => isActive ? classes.active : ''} to="/dialogs" >Messages</NavLink></li>
+          <li><NavLink className={({isActive}) => isActive ? classes.active : ''} to="/news" >News</NavLink></li>
+          <li><NavLink className={({isActive}) => isActive ? classes.active : ''} to="/music" >Music</NavLink></li>
+          <li><NavLink className={({isActive}) => isActive ? classes.active : ''} to="/settings" >Settings</NavLink></li>
         </ul>
     </nav>
   );
