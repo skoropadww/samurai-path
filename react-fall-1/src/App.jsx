@@ -19,7 +19,7 @@ class App extends Component {
             <div className="content_wrapper">
               <Sidebar />
               <Routes>
-                <Route exact path="/dialogs" element={<Dialogs />} />
+                <Route path="/dialogs/*" element={<Dialogs />} />
                 <Route  path="/profile" element={<Profile />} />
                 <Route path='/news' element={<News />}/>
                 <Route path='/music' element={<Music />}/>

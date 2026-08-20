@@ -1,0 +1,29 @@
+.message {
+  align-self: flex-start;
+  max-width: 85%;
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-sm);
+  background-color: color-mix(in srgb, var(--color-surface) 40%, var(--color-primary));
+  color: var(--color-on-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-line);
+  transition:
+    background-color var(--duration-base) var(--easing),
+    transform var(--duration-fast) var(--easing);
+}
+
+.message:hover {
+  background-color: color-mix(in srgb, var(--color-surface) 55%, var(--color-primary));
+  transform: translateX(2px);
+}
+
+.message:nth-child(even) {
+  align-self: flex-end;
+  background-color: color-mix(in srgb, var(--color-accent) 55%, var(--color-primary));
+  color: var(--color-on-primary);
+}
+
+.message:nth-child(even):hover {
+  background-color: color-mix(in srgb, var(--color-accent) 75%, var(--color-primary));
+}

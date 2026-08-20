@@ -1,49 +1,29 @@
 import React from 'react'
 import classes from './Dialogs.module.css'
-import { NavLink } from 'react-router-dom'
+import DialogItem from './DialogItem/DialogItem'
+import Message from './Message/Message'
 
 const Dialogs = (props) => {
+  let dialogs = [
+    { id: 1, name: 'Dimuchka' },
+    { id: 2, name: 'Vilat' },
+    { id: 3, name: 'Lida' },
+    { id: 4, name: 'Vasia' },
+    { id: 5, name: 'Pasha' },
+  ]
   return (
     <div className={classes.dialogs}>
       <div className={classes.dialog}>
-        <div className={`${classes.item} ${classes.active}`}>
-          <NavLink to="/dialogs/1">Dimuchka</NavLink>
-        </div>
-        <div className={classes.item}>
-          <NavLink to="/dialogs/2">Vilat</NavLink>
-        </div>
-        <div className={classes.item}>
-          <NavLink to="/dialogs/3">Lida</NavLink>
-        </div>
-        <div className={classes.item}>
-          <NavLink to="/dialogs/4">Vasia</NavLink>
-        </div>
-        <div className={classes.item}>
-          <NavLink to="/dialogs/5">Pasha</NavLink>
-        </div>
+        {dialogs.map(dialog => <DialogItem key={dialog.id} name={dialog.name} id={dialog.id} />)}
       </div>
       <div className={classes.messages}>
-        <div className={classes.message}>
-          Hello
-        </div>
-        <div className={classes.message}>
-          How are you?
-        </div>
-        <div className={classes.message}>
-          I'm fine, thank you!
-        </div>
-        <div className={classes.message}>
-          What are you doing?
-        </div>
-          <div className={classes.message}>
-          I'm doing nothing, you?
-        </div>
-        <div className={classes.message}>
-          I'm doing nothing, you?
-        </div>
-        <div className={classes.message}>
-          I'm doing nothing, you?
-        </div>
+        <Message message="Hello" />
+        <Message message="How are you?" />
+        <Message message="I'm fine, thank you!" />
+        <Message message="What are you doing?" />
+        <Message message="I'm doing nothing, you?" />
+        <Message message="I'm doing nothing, you?" />
+        <Message message="I'm doing nothing, you?" />
       </div>
     </div>
   )
