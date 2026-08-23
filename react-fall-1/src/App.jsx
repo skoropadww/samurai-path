@@ -19,11 +19,22 @@ class App extends Component {
             <div className="content_wrapper">
               <Sidebar />
               <Routes>
-                <Route path="/dialogs/*" element={<Dialogs />} />
-                <Route  path="/profile" element={<Profile />} />
-                <Route path='/news' element={<News />}/>
-                <Route path='/music' element={<Music />}/>
-                <Route path='/settings' element={<Settings />}/>
+                <Route
+                  path="/dialogs/*"
+                  element={
+                    <Dialogs
+                      dialogsData={this.props.dialogsData}
+                      messagesData={this.props.messagesData}
+                    />
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={<Profile postsData={this.props.postsData} />}
+                />
+                <Route path="/news" element={<News />} />
+                <Route path="/music" element={<Music />} />
+                <Route path="/settings" element={<Settings />} />
               </Routes>
             </div>
           </div>
