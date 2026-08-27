@@ -3,6 +3,13 @@ import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 
 const MyPosts = (props) => {
+  let postsData = props.postsData.map((post) => (
+    <Post
+      key={post.id}
+      massege={post.massege}
+      likeCount={post.likeCount}
+    />
+  ))
   return (
     <div className={classes.news}>
       <div className={classes.news_title}>
@@ -13,13 +20,7 @@ const MyPosts = (props) => {
         <button type="submit">New post</button>
       </form>
       <div className={classes.news_posts}>
-        {props.postsData.map((post) => (
-          <Post
-            key={post.id}
-            massege={post.massege}
-            likeCount={post.likeCount}
-          />
-        ))}
+        {postsData}
       </div>
     </div>
   )

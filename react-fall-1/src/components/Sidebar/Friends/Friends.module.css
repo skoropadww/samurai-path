@@ -1,0 +1,52 @@
+.friends {
+  margin-top: var(--space-20);
+  padding-top: var(--space-16);
+  border-top: 1px solid color-mix(in srgb, var(--color-on-primary) 12%, transparent);
+}
+
+.title {
+  margin: 0 0 var(--space-12);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: var(--text-heading-tracking);
+  color: var(--color-on-primary);
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--space-10);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  min-width: 0;
+  flex: 1;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-accent);
+  background-color: color-mix(in srgb, var(--color-surface) 30%, var(--color-primary));
+}
+
+.name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: color-mix(in srgb, var(--color-on-primary) 85%, transparent);
+  text-align: center;
+}

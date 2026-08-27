@@ -1,6 +1,7 @@
 .item {
   display: flex;
   align-items: center;
+  gap: var(--space-12);
   width: 100%;
   min-height: 44px;
   padding: var(--space-10) var(--space-16);
@@ -18,6 +19,16 @@
     background-color var(--duration-fast) var(--easing),
     border-color var(--duration-base) var(--easing),
     color var(--duration-fast) var(--easing);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-accent);
+  background-color: color-mix(in srgb, var(--color-surface) 30%, var(--color-primary));
 }
 
 .item:hover {
