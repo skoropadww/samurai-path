@@ -9,7 +9,7 @@ const Profile = (props) => {
     <div className={classes.content}>
       <ProfileBanner />
       <ProfileInfo />
-      <MyPosts postsData={props.postsData} />
+      <MyPosts postsData={props.state.postsData} />
     </div>
   )
 }

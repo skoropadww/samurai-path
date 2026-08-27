@@ -9,8 +9,7 @@ import Settings from './components/Settings/Settings'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import './index.css'
 
-class App extends Component {
-  render() {
+const App = (props) => {
     return (
       <BrowserRouter>
         <div className="app-wrapper">
@@ -23,14 +22,13 @@ class App extends Component {
                   path="/dialogs/*"
                   element={
                     <Dialogs
-                      dialogsData={this.props.dialogsData}
-                      messagesData={this.props.messagesData}
+                      state={props.state.dialogsPage}
                     />
                   }
                 />
                 <Route
                   path="/profile"
-                  element={<Profile postsData={this.props.postsData} />}
+                  element={<Profile state={props.state.profilePage} />}
                 />
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
@@ -42,6 +40,5 @@ class App extends Component {
       </BrowserRouter>
     )
   }
-}
 
 export default App
