@@ -9,6 +9,7 @@ import Settings from './components/Settings/Settings'
 import { Routes, Route } from 'react-router-dom'
 import './index.css'
 
+
 const App = (props) => {
     return (
         <div className="app-wrapper">
@@ -27,7 +28,7 @@ const App = (props) => {
                 />
                 <Route
                   path="/profile"
-                  element={<Profile state={props.state.profilePage} />}
+                  element={<Profile state={props.state.profilePage} addPost={props.addPost} />}
                 />
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
