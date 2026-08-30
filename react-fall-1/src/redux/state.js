@@ -7,6 +7,7 @@ let state = {
       { id: 2, massege: 'Hi, how are you?', likeCount: 20 },
       { id: 3, massege: 'I am fine, thank you!', likeCount: 30 },
     ],
+    newPostText: 'samurai-path-react',
   },
   dialogsPage: {
     dialogsData: [
@@ -34,13 +35,19 @@ let state = {
   },
 }
 
-export let addPost = (postMessage)=> {
+export let addPost = ()=> {
     let newPost = {
         id: 7,
-        massege: postMessage,
+        massege: state.profilePage.newPostText,
         likeCount: 17,
     }
     state.profilePage.postsData.push(newPost);
+    state.profilePage.newPostText = '';
+    renderEntireTree(state);
+}
+
+export let updateNewPostText = (postMessage)=> {
+    state.profilePage.newPostText = postMessage;
     renderEntireTree(state);
 }
 
