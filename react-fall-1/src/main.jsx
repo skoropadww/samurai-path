@@ -1,5 +1,5 @@
 import './index.css'
-import state, {subscribe, addPost, updateNewPostText }  from './redux/state'
+import store from './redux/state'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
@@ -13,13 +13,13 @@ const root = createRoot(document.getElementById('root'))
       <BrowserRouter>
         <App
           state={state}
-          addPost={addPost}
-          updateNewPostText={updateNewPostText}
+          addPost={store.addPost.bind(store)}
+          updateNewPostText={store.updateNewPostText.bind(store)}
         />
       </BrowserRouter>
     </StrictMode>
   )
 }
 
-renderEntireTree(state)
-subscribe(renderEntireTree)
+renderEntireTree(store.getState())
+store.subscribe(renderEntireTree)
