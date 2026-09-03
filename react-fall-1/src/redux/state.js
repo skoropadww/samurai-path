@@ -32,33 +32,32 @@ let store = {
             { id: 3, name: 'Sveta', avatar: 'https://i.pravatar.cc/150?img=9' },
           ],
         },
-      },
-      getState() {
-        return this._state;
-      },
-      setState(newState) {
-        this._state = newState;
-        this._callSubscriber();
-      },
-      _callSubscriber() {
-        console.log('State changed');
-      },
-      addPost() {
-        let newPost = {
-            id: 7,
-            massege: this._state.profilePage.newPostText,
-            likeCount: 17,
-        }
-        this._state.profilePage.postsData.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
     },
-    updateNewPostText(postMessage) {
-        this._state.profilePage.newPostText = postMessage;
-        this._callSubscriber(this._state);
+    _callSubscriber() {
+        console.log('State changed');
+    },
+    getState() {
+        return this._state;
     },
     subscribe (callback) {
         this._callSubscriber = callback;  // заменяем функцию на callback
+    },
+
+    dispatch(action){
+        if(action.type === "ADD-POST"){
+            let newPost = {
+                id: 7,
+                massege: this._state.profilePage.newPostText,
+                likeCount: 17,
+            }
+            this._state.profilePage.postsData.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.newPostText = action.postMessage;
+            this._callSubscriber(this._state);
+        }
+
     }
 
 }

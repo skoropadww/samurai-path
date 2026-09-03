@@ -13,13 +13,12 @@ const root = createRoot(document.getElementById('root'))
       <BrowserRouter>
         <App
           state={state}
-          addPost={store.addPost.bind(store)}
-          updateNewPostText={store.updateNewPostText.bind(store)}
-        />
-      </BrowserRouter>
-    </StrictMode>
-  )
-}
+          dispatch={store.dispatch.bind(store)}
+          />
+        </BrowserRouter>
+      </StrictMode>
+    );
+  };
 
-renderEntireTree(store.getState())
-store.subscribe(renderEntireTree)
+  renderEntireTree(store.getState());
+  store.subscribe(renderEntireTree);
