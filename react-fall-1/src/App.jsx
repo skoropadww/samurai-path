@@ -23,6 +23,7 @@ const App = (props) => {
                   element={
                     <Dialogs
                       state={props.state.dialogsPage}
+                      dispatch={props.dispatch}
                     />
                   }
                 />
