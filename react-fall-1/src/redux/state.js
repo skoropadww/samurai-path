@@ -60,7 +60,7 @@ let store = {
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.postMessage;
+            this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
         }
         else if(action.type === SEND_MESSAGE){
