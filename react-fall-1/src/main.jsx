@@ -1,5 +1,6 @@
 import './index.css'
-import store from './redux/state'
+import store from './redux/redux-store'
+// import store from './redux/store'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
@@ -21,4 +22,4 @@ const root = createRoot(document.getElementById('root'))
   };
 
   renderEntireTree(store.getState());
-  store.subscribe(renderEntireTree);
+  store.subscribe(() => renderEntireTree(store.getState()));
