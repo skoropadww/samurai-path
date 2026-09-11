@@ -3,6 +3,7 @@ import store from './redux/redux-store'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import StoreContext from './StoreContext'
 import App from './App'
 
 const root = createRoot(document.getElementById('root'))
@@ -13,11 +14,13 @@ let renderEntireTree = () => {
   root.render(
     <StrictMode>
       <BrowserRouter>
+        <StoreContext.Provider value={store}>
         <App
           state={state}
           dispatch={store.dispatch.bind(store)}
-          store={store}
-        />
+            store={store}
+          />
+        </StoreContext.Provider>
       </BrowserRouter>
     </StrictMode>,
   )
