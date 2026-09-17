@@ -42,6 +42,14 @@ const Sidebar = (props) => {
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? classes.active : '')}
+            to="/users"
+          >
+            Users
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={({ isActive }) => (isActive ? classes.active : '')}
             to="/settings"
           >
             Settings
