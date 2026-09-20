@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import s from './Users.module.css'
 import axios from 'axios'
 
 const Users = (props) => {
-  useEffect(() => {
+  let getUsers = () => {
     if (props.users.length === 0) {
       axios
         .get('/samurai-api/api/1.0/users', {
@@ -13,10 +13,11 @@ const Users = (props) => {
           props.setUsers(response.data.items)
         })
     }
-  }, [])
+  }
 
   return (
     <div className={s.users}>
+      <button onClick={getUsers}>Get Users</button>
       <h1 className={s.title}>Users</h1>
       <div className={s.list}>
         {props.users.map((u) => (
