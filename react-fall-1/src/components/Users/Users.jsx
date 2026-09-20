@@ -3,21 +3,21 @@ import s from './Users.module.css'
 import axios from 'axios'
 
 class Users extends React.Component {
-  getUsers = () => {
-    if (this.props.users.length === 0) {
-      axios
-        .get('/samurai-api/api/1.0/users', {
-          withCredentials: true,
-        })
-        .then((response) => {
-          this.props.setUsers(response.data.items)
-        })
-    }
+  constructor(props) {
+    super(props)
+
+    axios
+      .get('/samurai-api/api/1.0/users', {
+        withCredentials: true,
+      })
+      .then((response) => {
+        this.props.setUsers(response.data.items)
+      })
+
   }
   render() {
     return (
       <div className={s.users}>
-        <button onClick={this.getUsers}>Get Users</button>
         <h1 className={s.title}>Users</h1>
         <div className={s.list}>
           {this.props.users.map((u) => (
