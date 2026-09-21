@@ -143,6 +143,22 @@
   color: color-mix(in srgb, var(--color-on-primary) 70%, transparent);
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-16);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: var(--space-20);
+
+  .selectedPage {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+}
+
 @media (max-width: 600px) {
   .user_wrap {
     flex-direction: column;
