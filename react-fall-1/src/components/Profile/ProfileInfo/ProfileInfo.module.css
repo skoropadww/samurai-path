@@ -49,6 +49,32 @@
   color: color-mix(in srgb, var(--color-on-primary) 78%, transparent);
 }
 
+.details a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--easing);
+}
+
+.details a:hover {
+  color: #ffe566;
+  text-decoration: underline;
+}
+
+.label {
+  font-weight: 700;
+  color: var(--color-on-primary);
+  text-transform: capitalize;
+  margin-right: var(--space-6);
+}
+
+.contactsTitle {
+  margin: var(--space-16) 0 var(--space-10);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-on-primary);
+}
+
 @media (max-width: 600px) {
   .info {
     grid-template-columns: 1fr;
