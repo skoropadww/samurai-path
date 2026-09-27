@@ -19,7 +19,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Navigate to="/profile" replace />} />
             <Route path="/dialogs/*" element={<DialogsContainer />} />
-            <Route path="/profile" element={<ProfileContainer />} />
+            <Route path="/profile/:userId?" element={<ProfileContainer />} />
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/users" element={<UsersContainer />} />
