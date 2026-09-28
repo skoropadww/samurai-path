@@ -1,4 +1,4 @@
-import Header from './components/Header/Header'
+import HeaderContainer from './components/Header/HeaderContainer'
 import SidebarContainer from './components/Sidebar/SidebarContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
@@ -12,7 +12,7 @@ import './index.css'
 const App = () => {
   return (
     <div className="app-wrapper">
-      <Header />
+      <HeaderContainer />
       <div className="container">
         <div className="content_wrapper">
           <SidebarContainer />

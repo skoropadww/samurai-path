@@ -5,13 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    proxy: {
-      '/samurai-api': {
-        target: 'https://social-network.samuraijs.com',
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/samurai-api/, ''),
-      },
-    },
+    // API samuraijs разрешает CORS для :3000 и :4200 (не для :5173).
+    // :4200 — чтобы cookies логина с сайта работали с withCredentials.
+    port: 4200,
   },
 })
