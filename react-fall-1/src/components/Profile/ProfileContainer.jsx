@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Profile from './Profile'
 import { setUserProfile } from '../../redux/profile-reducer'
 import { withRouter } from '../../hoc/withRouter'
-import { publicInstance } from '../../api/api'
+import { profileAPI } from '../../api/api'
 
 class ProfileContainerClass extends React.Component {
   componentDidMount() {
@@ -12,10 +12,10 @@ class ProfileContainerClass extends React.Component {
       userId = 2
     }
 
-    publicInstance
-      .get(`profile/${userId}`)
-      .then((response) => {
-        this.props.setUserProfile(response.data)
+    profileAPI
+      .getProfile(userId)
+      .then((data) => {
+        this.props.setUserProfile(data)
       })
       .catch((error) => {
         console.error('Не удалось загрузить профиль', error)

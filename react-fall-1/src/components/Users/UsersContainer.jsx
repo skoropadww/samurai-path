@@ -10,32 +10,22 @@ import {
 import { connect } from 'react-redux'
 import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
-import { instance, publicInstance } from '../../api/api'
+import { usersAPI } from '../../api/api'
 
 class UsersContainerClass extends React.Component {
   getUsers = (pageNumber = this.props.currentPage) => {
     this.props.toggleIsFetching(true)
 
-    const url = `users?page=${pageNumber}&count=${this.props.pageSize}`
-
-    instance
-      .get(url)
-      .then((response) => {
+    usersAPI
+      .getUsers(pageNumber, this.props.pageSize)
+      .then((data) => {
         this.props.toggleIsFetching(false)
-        this.props.setUsers(response.data.items)
-        this.props.setTotalUsersCount(response.data.totalCount)
+        this.props.setUsers(data.items)
+        this.props.setTotalUsersCount(data.totalCount)
       })
-      .catch(() => {
-        publicInstance
-          .get(url)
-          .then((response) => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
-          })
-          .catch(() => {
-            this.props.toggleIsFetching(false)
-          })
+      .catch((error) => {
+        this.props.toggleIsFetching(false)
+        console.error('Не удалось загрузить пользователей', error)
       })
   }
 

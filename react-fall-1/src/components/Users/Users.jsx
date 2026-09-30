@@ -1,6 +1,7 @@
 import React from 'react'
 import s from './Users.module.css'
 import { NavLink } from 'react-router-dom'
+import { usersAPI } from '../../api/api'
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize) || 1
@@ -95,14 +96,36 @@ const Users = (props) => {
               {u.followed ? (
                 <button
                   className={s.user_btn_follow}
-                  onClick={() => props.unfollow(u.id)}
+                  onClick={() => {
+                    usersAPI
+                      .unfollow(u.id)
+                      .then((data) => {
+                        if (data.resultCode === 0) {
+                          props.unfollow(u.id)
+                        }
+                      })
+                      .catch((error) => {
+                        console.error('Не удалось отписаться', error)
+                      })
+                  }}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
                   className={s.user_btn_follow}
-                  onClick={() => props.follow(u.id)}
+                  onClick={() => {
+                    usersAPI
+                      .follow(u.id)
+                      .then((data) => {
+                        if (data.resultCode === 0) {
+                          props.follow(u.id)
+                        }
+                      })
+                      .catch((error) => {
+                        console.error('Не удалось подписаться', error)
+                      })
+                  }}
                 >
                   Follow
                 </button>
