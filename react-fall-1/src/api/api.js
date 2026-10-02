@@ -23,6 +23,9 @@ export const usersAPI = {
       .get(`users?page=${currentPage}&count=${pageSize}`)
       .then((response) => response.data)
   },
+  isFollowed(userId) {
+    return instance.get(`follow/${userId}`).then((response) => response.data)
+  },
   follow(userId) {
     return instance.post(`follow/${userId}`).then((response) => response.data)
   },

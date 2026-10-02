@@ -21,6 +21,31 @@ const Users = (props) => {
     pages.push(i)
   }
 
+  const toggleFollow = (u) => {
+    const request = u.followed ? usersAPI.unfollow : usersAPI.follow
+    const onSuccess = u.followed ? props.unfollow : props.follow
+
+    props.toggleIsFollowingInProgress(true, u.id)
+    request(u.id)
+      .then((data) => {
+        if (data.resultCode === 0) {
+          onSuccess(u.id)
+          return
+        }
+        console.warn(data.messages)
+        // список грузится без cookies, поэтому followed может не совпадать с сервером
+        return usersAPI.isFollowed(u.id).then((isFollowed) => {
+          isFollowed ? props.follow(u.id) : props.unfollow(u.id)
+        })
+      })
+      .catch((error) => {
+        console.error('Не удалось изменить подписку', error)
+      })
+      .finally(() => {
+        props.toggleIsFollowingInProgress(false, u.id)
+      })
+  }
+
   return (
     <div className={s.users}>
       <h1 className={s.title}>Users</h1>
@@ -93,43 +118,13 @@ const Users = (props) => {
                 />
                 </NavLink>
               </div>
-              {u.followed ? (
-                <button
-                  className={s.user_btn_follow}
-                  onClick={() => {
-                    usersAPI
-                      .unfollow(u.id)
-                      .then((data) => {
-                        if (data.resultCode === 0) {
-                          props.unfollow(u.id)
-                        }
-                      })
-                      .catch((error) => {
-                        console.error('Не удалось отписаться', error)
-                      })
-                  }}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                  className={s.user_btn_follow}
-                  onClick={() => {
-                    usersAPI
-                      .follow(u.id)
-                      .then((data) => {
-                        if (data.resultCode === 0) {
-                          props.follow(u.id)
-                        }
-                      })
-                      .catch((error) => {
-                        console.error('Не удалось подписаться', error)
-                      })
-                  }}
-                >
-                  Follow
-                </button>
-              )}
+              <button
+                disabled={props.followingInProgress.includes(u.id)}
+                className={s.user_btn_follow}
+                onClick={() => toggleFollow(u)}
+              >
+                {u.followed ? 'Unfollow' : 'Follow'}
+              </button>
             </div>
 
             <div className={s.user_right}>

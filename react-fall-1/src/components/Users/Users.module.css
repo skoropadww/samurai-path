@@ -88,6 +88,14 @@
   transform: translateY(0);
 }
 
+.user_btn_follow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--color-accent);
+  border-color: transparent;
+  transform: none;
+}
+
 .user_right {
   flex: 1;
   min-width: 0;
