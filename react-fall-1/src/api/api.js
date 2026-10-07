@@ -11,16 +11,18 @@ export const instance = axios.create({
   },
 })
 
-// Сервер отвечает 500 на users/profile, если прислать cookie нашего аккаунта,
-// а без cookies отдаёт 200. Поэтому публичные данные берём без cookies.
+// Иногда сервер отвечает 500 на запросы с cookie аккаунта, а без cookies отдаёт 200.
 export const publicInstance = axios.create({
   baseURL,
 })
 
 export const usersAPI = {
   getUsers(currentPage = 1, pageSize = 10) {
-    return publicInstance
-      .get(`users?page=${currentPage}&count=${pageSize}`)
+    const url = `users?page=${currentPage}&count=${pageSize}`
+    // с cookies сервер присылает настоящий followed для залогиненного пользователя
+    return instance
+      .get(url)
+      .catch(() => publicInstance.get(url))
       .then((response) => response.data)
   },
   isFollowed(userId) {

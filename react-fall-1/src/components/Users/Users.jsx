@@ -1,8 +1,6 @@
 import React from 'react'
 import s from './Users.module.css'
 import { NavLink } from 'react-router-dom'
-import { usersAPI } from '../../api/api'
-
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize) || 1
   let pages = []
@@ -22,28 +20,7 @@ const Users = (props) => {
   }
 
   const toggleFollow = (u) => {
-    const request = u.followed ? usersAPI.unfollow : usersAPI.follow
-    const onSuccess = u.followed ? props.unfollow : props.follow
-
-    props.toggleIsFollowingInProgress(true, u.id)
-    request(u.id)
-      .then((data) => {
-        if (data.resultCode === 0) {
-          onSuccess(u.id)
-          return
-        }
-        console.warn(data.messages)
-        // список грузится без cookies, поэтому followed может не совпадать с сервером
-        return usersAPI.isFollowed(u.id).then((isFollowed) => {
-          isFollowed ? props.follow(u.id) : props.unfollow(u.id)
-        })
-      })
-      .catch((error) => {
-        console.error('Не удалось изменить подписку', error)
-      })
-      .finally(() => {
-        props.toggleIsFollowingInProgress(false, u.id)
-      })
+    u.followed ? props.unfollow(u.id) : props.follow(u.id)
   }
 
   return (

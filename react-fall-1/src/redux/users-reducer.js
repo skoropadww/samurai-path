@@ -1,3 +1,4 @@
+import { usersAPI } from '../api/api'
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -68,14 +69,14 @@ export const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const follow = (userId) => {
+export const acceptFollow = (userId) => {
     return {
         type: FOLLOW,
         userId,
     }
 }
 
-export const unfollow = (userId) => {
+export const acceptUnfollow = (userId) => {
     return {
         type: UNFOLLOW,
         userId,
@@ -115,5 +116,58 @@ export const toggleIsFollowingInProgress = (isFollowingInProgress, userId) => {
         type: TOGGLE_IS_FOLLOWING_IN_PROGRESS,
         isFollowingInProgress: isFollowingInProgress,
         userId: userId,
+    }
+}
+
+export const getUsersThunkCreator = (pageNumber, pageSize) => {
+   return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+
+        usersAPI
+        .getUsers(pageNumber, pageSize)
+        .then((data) => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsersCount(data.totalCount))
+        })
+        .catch((error) => {
+            dispatch(toggleIsFetching(false))
+            console.error('Не удалось загрузить пользователей', error)
+        })
+    }
+}
+
+const followUnfollowFlow = (dispatch, userId, apiMethod, actionCreator) => {
+    dispatch(toggleIsFollowingInProgress(true, userId))
+
+    apiMethod(userId)
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(actionCreator(userId))
+                return
+            }
+            console.warn(data.messages)
+            // followed в списке мог устареть (например, подписались с другой вкладки)
+            return usersAPI.isFollowed(userId).then((isFollowed) => {
+                dispatch(isFollowed ? acceptFollow(userId) : acceptUnfollow(userId))
+            })
+        })
+        .catch((error) => {
+            console.error('Не удалось изменить подписку', error)
+        })
+        .finally(() => {
+            dispatch(toggleIsFollowingInProgress(false, userId))
+        })
+}
+
+export const follow = (userId) => {
+    return (dispatch) => {
+        followUnfollowFlow(dispatch, userId, usersAPI.follow, acceptFollow)
+    }
+}
+
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        followUnfollowFlow(dispatch, userId, usersAPI.unfollow, acceptUnfollow)
     }
 }
