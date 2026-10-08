@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
-import { setUserProfile } from '../../redux/profile-reducer'
 import { withRouter } from '../../hoc/withRouter'
-import { profileAPI } from '../../api/api'
+import { getUserProfileThunks } from '../../redux/profile-reducer'
 
 class ProfileContainerClass extends React.Component {
   componentDidMount() {
@@ -12,14 +11,8 @@ class ProfileContainerClass extends React.Component {
       userId = 2
     }
 
-    profileAPI
-      .getProfile(userId)
-      .then((data) => {
-        this.props.setUserProfile(data)
-      })
-      .catch((error) => {
-        console.error('Не удалось загрузить профиль', error)
-      })
+    this.props.getUserProfileThunks(userId)
+     
   }
 
   render() {
@@ -35,6 +28,6 @@ let mapStateToProps = (state) => {
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainerClass)
 
-export default connect(mapStateToProps, { setUserProfile })(
+export default connect(mapStateToProps, { getUserProfileThunks })(
   WithUrlDataContainerComponent,
 )
