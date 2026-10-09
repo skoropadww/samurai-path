@@ -6,6 +6,7 @@ import News from './components/News/News'
 import Music from './components/Music/Music'
 import Settings from './components/Settings/Settings'
 import UsersContainer from './components/Users/UsersContainer'
+import Login from './components/Login/Login'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import './index.css'
 
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/music" element={<Music />} />
             <Route path="/users" element={<UsersContainer />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </div>
