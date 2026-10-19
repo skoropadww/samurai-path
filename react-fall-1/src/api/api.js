@@ -2,12 +2,11 @@ import axios from 'axios'
 
 const baseURL = 'https://social-network.samuraijs.com/api/1.0/'
 
-// CORS samuraijs разрешает localhost:3000 и localhost:4200.
 export const instance = axios.create({
   baseURL,
   withCredentials: true,
   headers: {
-    'API-KEY': 'e9cb2d44-884a-4217-b74a-9f9389cc8f8c',
+    'API-KEY': 'c1b71fa9-7b01-45c1-8e0e-5625682cd872',
   },
 })
 
@@ -41,6 +40,12 @@ export const profileAPI = {
     return publicInstance
       .get(`profile/${userId}`)
       .then((response) => response.data)
+  },
+  getStatus(userId) {
+    return publicInstance.get(`profile/status/${userId}`).then((response) => response.data)
+  },
+  updateStatus(status) {
+    return instance.put(`profile/status`, { status }).then((response) => response.data)
   },
 }
 

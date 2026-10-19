@@ -3,7 +3,7 @@ import { profileAPI } from '../api/api'
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
-
+const SET_STATUS = 'SET-STATUS'
 let initialState = {
   postsData: [
     { id: 1, massege: 'Hello, world!', likeCount: 10 },
@@ -12,6 +12,7 @@ let initialState = {
   ],
   newPostText: 'samurai-path-react',
   profile: null,
+  status: '',
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -38,6 +39,11 @@ export const profileReducer = (state = initialState, action) => {
         ...state,
         profile: action.profile,
       }
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.status,
+      }
     default:
       return state
   }
@@ -63,6 +69,13 @@ const setUserProfile = (profile) => {
   }
 }
 
+const setStatus = (status) => {
+  return {
+    type: SET_STATUS,
+    status,
+  }
+}
+
 export const getUserProfileThunks = (userId) => {
   return (dispatch) => {
     profileAPI.getProfile(userId)
@@ -70,7 +83,33 @@ export const getUserProfileThunks = (userId) => {
         dispatch(setUserProfile(data))
       })
       .catch((error) => {
-        console.error('Не удалось загрузить профиль', error)
+        console.error('Не удалось загрузить профиль:', error)
+      })
+  }
+}
+
+export const getStatusThunks = (userId) => {
+  return (dispatch) => {
+    profileAPI.getStatus(userId)
+      .then((data) => {
+        dispatch(setStatus(data))
+      })
+      .catch((error) => {
+        console.error('Не удалось загрузить статус:', error)
+      })
+  }
+}
+
+export const updateStatusThunks = (status) => {
+  return (dispatch) => {
+    profileAPI.updateStatus(status)
+      .then((data) => {
+        if (data.resultCode === 0) {
+          dispatch(setStatus(status))
+        }
+      })
+      .catch((error) => {
+        console.error('Не удалось обновить статус:', error)
       })
   }
 }
