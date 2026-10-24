@@ -3,18 +3,13 @@ import classes from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
 import { Navigate } from 'react-router-dom'
+import DialogsFormReduxForm from './DialogsForm'
 
 const Dialogs = (props) => {
-  let newMessageElement = React.createRef()
-
-  let onAddMessage = (e) => {
-    e.preventDefault()
-    props.addMessage()
-  }
-
-  let onMessageChange = () => {
-    let text = newMessageElement.current.value
-    props.messageChange(text)
+  const addMessage = (formData, dispatch, formProps) => {
+    if (!formData.message?.trim()) return
+    props.addMessage(formData.message)
+    formProps.reset()
   }
 
   let dialogsData = props.dialogsPage.dialogsData.map((dialog) => (
@@ -41,18 +36,12 @@ const Dialogs = (props) => {
       </div>
       <div className={classes.messages}>
         {messagesData}
-        <form className={classes.messages_form}>
-          <textarea
-            onChange={onMessageChange}
-            value={props.dialogsPage.newMessageText}
-            ref={newMessageElement}
-            placeholder="Write your message here..."
-          />
-          <button onClick={onAddMessage} type="submit">Send</button>
-        </form>
+        <DialogsFormReduxForm onSubmit={addMessage} />
       </div>
     </div>
   )
 }
 
 export default Dialogs
+
+

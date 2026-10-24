@@ -8,18 +8,22 @@ const Login = () => {
     console.log(formData)
   }
   return <div className={styles.login}>
-    <h1>Login</h1>
-    <LoginFormReduxForm onSubmit={onSubmit} />
+    <div className={styles.login_card}>
+      <h1 className={styles.login_title}>Login</h1>
+      <LoginFormReduxForm onSubmit={onSubmit} />
     </div>
+  </div>
 }
 
 const LoginForm = (props) => {
   return (
-    <form onSubmit={props.handleSubmit}>
-      <div><Field name={'login'} component={'input'} placeholder={`Login`} /></div>
-      <div><Field name={'password'} component={'input'} placeholder={`Password`} /></div>
-      <div><Field name={'rememberMe'} component={'input'} type={'checkbox'} /> Remember me</div>
-      <div><button type={'submit'}>Login</button></div>
+    <form className={styles.login_form} onSubmit={props.handleSubmit}>
+      <Field name={'login'} component={'input'} placeholder={`Login`} />
+      <Field name={'password'} component={'input'} type={'password'} placeholder={`Password`} />
+      <label className={styles.login_remember}>
+        <Field name={'rememberMe'} component={'input'} type={'checkbox'} /> Remember me
+      </label>
+      <button type={'submit'}>Login</button>
     </form>
   )
 }

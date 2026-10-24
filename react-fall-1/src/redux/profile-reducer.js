@@ -1,7 +1,6 @@
 import { profileAPI } from '../api/api'
 
 const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const SET_STATUS = 'SET-STATUS'
 let initialState = {
@@ -10,7 +9,6 @@ let initialState = {
     { id: 2, massege: 'Hi, how are you?', likeCount: 20 },
     { id: 3, massege: 'I am fine, thank you!', likeCount: 30 },
   ],
-  newPostText: 'samurai-path-react',
   profile: null,
   status: '',
 }
@@ -19,21 +17,15 @@ export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST: {
       let newPost = {
-        id: 7,
-        massege: state.newPostText,
-        likeCount: 17,
+        id: Date.now(),
+        massege: action.newPostText,
+        likeCount: 0,
       }
       return {
         ...state,
-        newPostText: '',
         postsData: [...state.postsData, newPost],
       }
     }
-    case UPDATE_NEW_POST_TEXT:
-      return {
-        ...state,
-        newPostText: action.newText,
-      }
     case SET_USER_PROFILE:
       return {
         ...state,
@@ -49,16 +41,10 @@ export const profileReducer = (state = initialState, action) => {
   }
 }
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (newPostText) => {
   return {
     type: ADD_POST,
-  }
-}
-
-export const updateNewPostTextActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text,
+    newPostText,
   }
 }
 
