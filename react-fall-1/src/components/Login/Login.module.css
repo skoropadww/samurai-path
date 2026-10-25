@@ -68,25 +68,7 @@
   background-color: color-mix(in srgb, var(--color-surface) 28%, var(--color-primary));
 }
 
-.login_remember {
-  display: flex;
-  align-items: center;
-  gap: var(--space-10);
-  min-height: 44px;
-  color: color-mix(in srgb, var(--color-on-primary) 85%, transparent);
-  cursor: pointer;
-  user-select: none;
-}
-
-.login_remember input {
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  accent-color: var(--color-accent);
-  cursor: pointer;
-}
-
-.login_form button {
+.login_form > button {
   align-self: stretch;
   min-height: 44px;
   padding: var(--space-10) var(--space-20);
@@ -105,17 +87,17 @@
     transform var(--duration-fast) var(--easing);
 }
 
-.login_form button:hover {
+.login_form > button:hover {
   background-color: #ffe566;
   border-color: #ffe566;
   transform: translateY(-1px);
 }
 
-.login_form button:focus-visible {
+.login_form > button:focus-visible {
   outline: 2px solid #ffe566;
   outline-offset: 2px;
 }
 
-.login_form button:active {
+.login_form > button:active {
   transform: translateY(0);
 }

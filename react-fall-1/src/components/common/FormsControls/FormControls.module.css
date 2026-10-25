@@ -1,0 +1,280 @@
+.formControl {
+    --color-error: #ff6b6b;
+    --color-success: #7ed67e;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    width: 100%;
+}
+
+.fieldWrapper {
+    position: relative;
+}
+
+.formControl .textarea,
+.formControl .input {
+    padding-right: 44px;
+}
+
+.formControl .passwordInput {
+    padding-right: 88px;
+}
+
+.formControl.error .textarea,
+.formControl.error .input {
+    border-color: var(--color-error);
+    background-color: color-mix(in srgb, var(--color-error) 10%, var(--color-primary));
+    animation: shake 400ms var(--easing);
+}
+
+.formControl.error .textarea:focus,
+.formControl.error .input:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-error) 25%, transparent);
+}
+
+.formControl.valid .textarea,
+.formControl.valid .input {
+    border-color: var(--color-success);
+}
+
+.formControl.valid .textarea:focus,
+.formControl.valid .input:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 25%, transparent);
+}
+
+/* Password */
+
+.input ~ .icon {
+    top: 15px;
+}
+
+.icon.iconBeforeToggle {
+    right: 58px;
+}
+
+.formControl .toggleVisibility {
+    position: absolute;
+    top: 50%;
+    right: var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    box-shadow: none;
+    color: color-mix(in srgb, var(--color-on-primary) 55%, transparent);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition:
+        color var(--duration-fast) var(--easing),
+        background-color var(--duration-fast) var(--easing);
+}
+
+.formControl .toggleVisibility::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background-color: color-mix(in srgb, var(--color-on-primary) 15%, transparent);
+}
+
+.formControl .toggleVisibility:hover {
+    color: var(--color-accent);
+    background-color: color-mix(in srgb, var(--color-accent) 14%, transparent);
+    transform: translateY(-50%);
+}
+
+.formControl .toggleVisibility[aria-pressed='true'] {
+    color: var(--color-accent);
+}
+
+.formControl .toggleVisibility:focus-visible {
+    outline: 2px solid #ffe566;
+    outline-offset: 1px;
+}
+
+.formControl .toggleVisibility:active {
+    transform: translateY(-50%);
+}
+
+.formControl .toggleVisibility svg {
+    transition: transform var(--duration-fast) var(--easing);
+}
+
+.formControl .toggleVisibility:active svg {
+    transform: scale(0.85);
+}
+
+.eyeSlash {
+    stroke-dasharray: 23;
+    stroke-dashoffset: 23;
+    animation: draw var(--duration-base) var(--easing) forwards;
+}
+
+/* Checkbox */
+
+.checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-10);
+    min-height: 44px;
+    color: color-mix(in srgb, var(--color-on-primary) 85%, transparent);
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkboxInput {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.checkboxBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border: 2px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+    border-radius: 6px;
+    background-color: color-mix(in srgb, var(--color-surface) 18%, var(--color-primary));
+    color: var(--color-on-accent);
+    transition:
+        background-color var(--duration-fast) var(--easing),
+        border-color var(--duration-fast) var(--easing),
+        transform var(--duration-fast) var(--easing);
+}
+
+.checkboxMark {
+    stroke-dasharray: 22;
+    stroke-dashoffset: 22;
+    transition: stroke-dashoffset var(--duration-base) var(--easing);
+}
+
+.checkbox:hover .checkboxBox {
+    border-color: var(--color-accent);
+}
+
+.checkboxInput:checked + .checkboxBox {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent);
+    animation: pop var(--duration-base) var(--easing);
+}
+
+.checkboxInput:checked + .checkboxBox .checkboxMark {
+    stroke-dashoffset: 0;
+}
+
+.checkboxInput:focus-visible + .checkboxBox {
+    outline: 2px solid #ffe566;
+    outline-offset: 2px;
+}
+
+.checkbox:active .checkboxBox {
+    transform: scale(0.9);
+}
+
+.formControl.error .checkboxBox {
+    border-color: var(--color-error);
+    animation: shake 400ms var(--easing);
+}
+
+.formControl.error .checkboxLabel {
+    color: var(--color-error);
+}
+
+.icon {
+    position: absolute;
+    top: var(--space-12);
+    right: var(--space-12);
+    display: flex;
+    pointer-events: none;
+    animation: pop var(--duration-base) var(--easing);
+}
+
+.iconError {
+    color: var(--color-error);
+}
+
+.iconSuccess {
+    color: var(--color-success);
+}
+
+.check {
+    stroke-dasharray: 16;
+    stroke-dashoffset: 16;
+    animation: draw var(--duration-slow) var(--easing) 100ms forwards;
+}
+
+.errorMessage {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    padding: var(--space-6) var(--space-12);
+    border-radius: var(--radius-sm);
+    background-color: color-mix(in srgb, var(--color-error) 14%, transparent);
+    color: var(--color-error);
+    font-size: 14px;
+    font-weight: 700;
+    animation: slideDown var(--duration-base) var(--easing);
+}
+
+.errorMessage svg {
+    flex-shrink: 0;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+@keyframes pop {
+    0% { opacity: 0; transform: scale(0.4); }
+    70% { transform: scale(1.15); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes draw {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .formControl.error .textarea,
+    .formControl.error .input,
+    .formControl.error .checkboxBox,
+    .checkboxInput:checked + .checkboxBox,
+    .icon,
+    .check,
+    .eyeSlash,
+    .errorMessage {
+        animation: none;
+    }
+
+    .check,
+    .eyeSlash {
+        stroke-dashoffset: 0;
+    }
+
+    .checkboxMark {
+        transition: none;
+    }
+}
