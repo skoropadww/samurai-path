@@ -11,21 +11,27 @@ const Header = (props) => {
           <img src={logoSrc} alt="logo" />
         </div>
         <div className={classes.login_block}>
-          {props.isAuth ? (
-            <NavLink
-              className={classes.user_info}
-              to={`/profile/${props.userId}`}
-            >
-              <img
-                className={classes.user_avatar}
-                src={
-                  props.photoUrl ||
-                  `https://i.pravatar.cc/150?u=${props.userId}`
-                }
-                alt={props.login}
-              />
-              <span className={classes.login_name}>{props.login}</span>
-            </NavLink>
+          {props.isAuth ? 
+          (
+            <div className={classes.user_info_block}>
+              <NavLink
+                className={classes.user_info}
+                to={`/profile/${props.userId}`}
+              >
+                <img
+                  className={classes.user_avatar}
+                  src={
+                    props.photoUrl ||
+                    `https://i.pravatar.cc/150?u=${props.userId}`
+                  }
+                  alt={props.login}
+                />
+                <span className={classes.login_name}>{props.login}</span>
+              </NavLink>
+              <NavLink className={classes.login_btn}  onClick={props.logoutThunks} replace>
+                Logout
+              </NavLink>
+            </div>
           ) : (
             <NavLink className={classes.login_btn} to="/login">
               Login

@@ -18,7 +18,6 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.payload,
-        isAuth: true,
       }
     case TOGGLE_IS_FETCHING:
       return {
@@ -30,10 +29,10 @@ export const authReducer = (state = initialState, action) => {
   }
 }
 
-const setAuthUserData = (userId, login, email, photoUrl) => {
+const setAuthUserData = (userId, login, email, photoUrl, isAuth) => {
   return {
     type: SET_USER_DATA,
-    payload: { userId, login, email, photoUrl },
+    payload: { userId, login, email, photoUrl, isAuth },
   }
 }
 
@@ -52,19 +51,44 @@ export const getAuthUserDataThunks = () => {
         dispatch(toggleIsFetching(false))
         if (data.resultCode === 0) {
           let { id, login, email } = data.data
-          dispatch(setAuthUserData(id, login, email, null))
+          dispatch(setAuthUserData(id, login, email, null, true))
 
           profileAPI
             .getProfile(id)
             .then((profile) => {
               let photoUrl = profile.photos.small || profile.photos.large || null
-              dispatch(setAuthUserData(id, login, email, photoUrl))
+              dispatch(setAuthUserData(id, login, email, photoUrl, true))
             })
             .catch(() => {})
         }
       })
       .catch(() => {
         dispatch(toggleIsFetching(false))
+      })
+  }
+}
+
+export const loginThunks = (email, password, rememberMe ) => {
+  return (dispatch) => {
+    authAPI
+      .login(email, password, rememberMe)
+      .then((data) => {
+        if (data.resultCode === 0) {
+          dispatch(getAuthUserDataThunks())
+        }
+      })
+  }
+}
+
+
+export const logoutThunks = () => {
+  return (dispatch) => {
+    authAPI
+      .logout()
+      .then((data) => {
+        if (data.resultCode === 0) {
+          dispatch(setAuthUserData(null, null, null, null, false))
+        }
       })
   }
 }

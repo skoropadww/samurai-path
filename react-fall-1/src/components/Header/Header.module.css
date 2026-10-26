@@ -36,6 +36,12 @@
   align-items: center;
 }
 
+.user_info_block {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
 .user_info {
   display: flex;
   align-items: center;
