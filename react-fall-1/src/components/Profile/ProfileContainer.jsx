@@ -9,8 +9,8 @@ import { compose } from 'redux'
 class ProfileContainerClass extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId
-    if (!userId) {
-      userId = 35040
+    if (!userId ) {
+      userId = this.props.loginedUserId
     }
 
     this.props.getUserProfileThunks(userId)
@@ -31,6 +31,8 @@ let mapStateToProps = (state) => {
   return {
     profile: state.profilePage.profile,
     status: state.profilePage.status,
+    loginedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth,
   }
 }
 

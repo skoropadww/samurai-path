@@ -101,3 +101,35 @@
 .login_form > button:active {
   transform: translateY(0);
 }
+
+
+.login_error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+  padding: var(--space-10) var(--space-12);
+  border: 1px solid color-mix(in srgb, #ff6b6b 45%, transparent);
+  border-radius: var(--radius-sm);
+  background-color: color-mix(in srgb, #ff6b6b 14%, transparent);
+  color: #ff6b6b;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  animation: login_error_in var(--duration-base) var(--easing);
+}
+
+.login_error svg {
+  flex-shrink: 0;
+}
+
+@keyframes login_error_in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login_error {
+    animation: none;
+  }
+}

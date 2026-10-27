@@ -1,4 +1,5 @@
 import { authAPI, profileAPI } from '../api/api'
+import { stopSubmit } from 'redux-form'
 
 const SET_USER_DATA = 'SET-USER-DATA'
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
@@ -75,6 +76,9 @@ export const loginThunks = (email, password, rememberMe ) => {
       .then((data) => {
         if (data.resultCode === 0) {
           dispatch(getAuthUserDataThunks())
+        } else {
+          let messages = data.messages.length > 0 ? data.messages.join(', ') : 'Some error'
+          dispatch(stopSubmit('login', {_error: messages}))
         }
       })
   }

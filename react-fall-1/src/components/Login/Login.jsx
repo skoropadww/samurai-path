@@ -25,11 +25,24 @@ const Login = (props) => {
 }
 
 const LoginForm = (props) => {
+  const hasFieldErrors = (props.anyTouched || props.submitFailed) && props.invalid
+  const formError = props.error || (hasFieldErrors && 'Please fill in all required fields correctly')
+
   return (
     <form className={styles.login_form} onSubmit={props.handleSubmit}>
       <Field name={'login'} component={Input} placeholder={`Login`} validate={[required]} />
       <Field name={'password'} component={Input} type={'password'} placeholder={`Password`} validate={[required]} />
       <Field name={'rememberMe'} component={Input} type={'checkbox'} label={'Remember me'} />
+      {formError && (
+        <div className={styles.login_error} role="alert">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2" />
+            <line x1="12" y1="7" x2="12" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="12" cy="17" r="1.3" fill="currentColor" />
+          </svg>
+          {formError}
+        </div>
+      )}
       <button type={'submit'}>Login</button>
     </form>
   )
