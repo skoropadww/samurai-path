@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'https://social-network.samuraijs.com/api/1.0/'
+// Для настоящего API: VITE_API_BASE_URL=https://social-network.samuraijs.com/api/1.0/
+const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4300/api/1.0/'
 
 export const instance = axios.create({
   baseURL,

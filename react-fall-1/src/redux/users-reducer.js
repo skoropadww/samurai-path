@@ -146,7 +146,6 @@ const followUnfollowFlow = (dispatch, userId, apiMethod, actionCreator) => {
                 dispatch(actionCreator(userId))
                 return
             }
-            console.warn(data.messages)
             // followed в списке мог устареть (например, подписались с другой вкладки)
             return usersAPI.isFollowed(userId).then((isFollowed) => {
                 dispatch(isFollowed ? acceptFollow(userId) : acceptUnfollow(userId))

@@ -49,5 +49,4 @@ export default compose(
     setCurrentPage,
     getUsersThunkCreator,
   }),
-  withAuthRedirect,
 )(UsersContainerClass)

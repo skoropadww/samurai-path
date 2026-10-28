@@ -30,8 +30,8 @@ const LoginForm = (props) => {
 
   return (
     <form className={styles.login_form} onSubmit={props.handleSubmit}>
-      <Field name={'login'} component={Input} placeholder={`Login`} validate={[required]} />
-      <Field name={'password'} component={Input} type={'password'} placeholder={`Password`} validate={[required]} />
+      <Field name={'login'} component={Input} placeholder={`Login`} autoComplete={'username'} validate={[required]} />
+      <Field name={'password'} component={Input} type={'password'} placeholder={`Password`} autoComplete={'current-password'} validate={[required]} />
       <Field name={'rememberMe'} component={Input} type={'checkbox'} label={'Remember me'} />
       {formError && (
         <div className={styles.login_error} role="alert">
